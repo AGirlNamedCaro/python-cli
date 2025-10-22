@@ -1,0 +1,12 @@
+[project]
+name = "python-cli"
+version = "1.00"
+description = "A command-line toolkit with safe file read, grep/search, JSON pretty-print, checksums, and search/replace (dry-run)"
+authors = [{name = "Carolina Contreras Issa"}]
+dependencies = [
+    "pytest==8.4.2",
+    "black==25.9.0"
+]
+
+[project.scripts]
+pythoncli = "pythoncli.main:main"
