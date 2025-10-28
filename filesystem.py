@@ -1,4 +1,4 @@
-from exceptions import PathTraversalError, SymLinkNotAllowedError, IsADirectoryError
+from exceptions import PathTraversalError, SymLinkNotAllowedError
 from pathlib import Path
 
 

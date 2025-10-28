@@ -1,5 +1,5 @@
 import pytest
-from exceptions import PathTraversalError, SymLinkNotAllowedError, IsADirectoryError
+from exceptions import PathTraversalError, SymLinkNotAllowedError
 from filesystem import SafeFileSystem
 
 
@@ -79,3 +79,4 @@ def test_read_empty_file(tmp_path):
     empty_file.write_text("")
     result = fs.read_file("empty_file.txt")
     assert result == b""
+    
