@@ -73,10 +73,10 @@ def test_read_file_returns_content(tmp_path):
 
     assert result == b"Hello World"
 
+
 def test_read_empty_file(tmp_path):
     fs = SafeFileSystem(tmp_path)
     empty_file = tmp_path / "empty_file.txt"
     empty_file.write_text("")
     result = fs.read_file("empty_file.txt")
     assert result == b""
-    

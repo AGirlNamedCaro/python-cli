@@ -3,6 +3,7 @@ from filesystem import SafeFileSystem
 from commands.read import read_command
 from exceptions import BinaryFileError
 
+
 def test_read_command_returns_file_content(tmp_path):
     fs = SafeFileSystem(tmp_path)
     real_file = tmp_path / "real_file.txt"
@@ -10,6 +11,7 @@ def test_read_command_returns_file_content(tmp_path):
 
     result = read_command(fs, "real_file.txt")
     assert result == "This is a real file."
+
 
 def test_read_command_rejects_binary_file(tmp_path):
     fs = SafeFileSystem(tmp_path)
