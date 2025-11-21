@@ -31,9 +31,11 @@ def main():
         choices=["md5", "sha256", "sha512"],
         help="Hash algorithm (default: sha256)",
     )
-    
-    json_parser = subparsers.add_parser('json-pretty', help='Format JSON with proper indentation')
-    json_parser.add_argument('file', help='JSON file to format')
+
+    json_parser = subparsers.add_parser(
+        "json-pretty", help="Format JSON with proper indentation"
+    )
+    json_parser.add_argument("file", help="JSON file to format")
 
     args = parser.parse_args()
 

@@ -15,7 +15,8 @@ def test_grep_command_finds_pattern_in_files(tmp_path):
     expected = "file1.txt: This has TODO in it\nfile3.txt: Also has TODO"
 
     assert result == expected
-    
+
+
 def test_grep_multiple_matches_in_file(tmp_path):
     fs = SafeFileSystem(tmp_path)
 
@@ -26,7 +27,8 @@ def test_grep_multiple_matches_in_file(tmp_path):
     expected = "file1.txt: TODO line one\nfile1.txt: TODO line two"
 
     assert result == expected
-    
+
+
 def test_grep_skips_binary_files(tmp_path):
     fs = SafeFileSystem(tmp_path)
 

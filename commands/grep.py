@@ -1,11 +1,12 @@
 from filesystem import SafeFileSystem
 
+
 def grep_command(fs: SafeFileSystem, pattern: str, file_pattern: str) -> list[str]:
     files = sorted(fs.list_files(file_pattern))
     results = []
     for file in files:
         raw = fs.read_file(file)
-        
+
         if is_binary(raw):
             print(f"Skipping binary file: {file}")
             continue
@@ -15,6 +16,7 @@ def grep_command(fs: SafeFileSystem, pattern: str, file_pattern: str) -> list[st
                 if pattern in line:
                     results.append(f"{file}: {line}")
     return "\n".join(results)
+
 
 def is_binary(data: bytes) -> bool:
     textchars = bytearray({7, 8, 9, 10, 12, 13, 27} | set(range(0x20, 0x100)))
