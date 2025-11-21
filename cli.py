@@ -16,10 +16,21 @@ def main():
 
     read_parser = subparsers.add_parser("read", help="Read a text file safely")
     read_parser.add_argument("file", help="File to read")
-    
-    grep_parser = subparsers.add_parser("grep", help="Search for a pattern in text files safely")
+
+    grep_parser = subparsers.add_parser(
+        "grep", help="Search for a pattern in text files safely"
+    )
     grep_parser.add_argument("pattern", help="Pattern to search for")
     grep_parser.add_argument("glob", help="File pattern (e.g., *.txt, **/*.py)")
+
+    checksum_parser = subparsers.add_parser("checksum", help="Calculate file checksum")
+    checksum_parser.add_argument("file", help="File to checksum")
+    checksum_parser.add_argument(
+        "--algorithm",
+        default="sha256",
+        choices=["md5", "sha256", "sha512"],
+        help="Hash algorithm (default: sha256)",
+    )
 
     args = parser.parse_args()
 
