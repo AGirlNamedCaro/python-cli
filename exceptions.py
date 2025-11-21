@@ -8,3 +8,6 @@ class SymLinkNotAllowedError(Exception):
 
 class BinaryFileError(Exception):
     """Raised when a binary file is encountered but only text files are allowed."""
+
+class InvalidJSONError(Exception):
+    """Raised when JSON is invalid"""

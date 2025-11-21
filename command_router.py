@@ -3,6 +3,7 @@ from filesystem import SafeFileSystem
 from commands.read import read_command
 from commands.grep import grep_command
 from commands.checksum import checksum_command
+from commands.json_pretty import json_pretty_command
 
 
 def execute_command(args):
@@ -19,3 +20,5 @@ def execute_command(args):
 
         case "checksum":
             return checksum_command(fs, args.file, args.algorithm)
+        case "json-pretty":
+            return json_pretty_command(fs, args.file)
