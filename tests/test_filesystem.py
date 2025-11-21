@@ -125,37 +125,42 @@ def test_list_files_recursive_glob(tmp_path):
 
     assert set(result) == expected
 
+
 def test_write_file_creates_new_file(tmp_path):
     fs = SafeFileSystem(tmp_path)
-    
+
     fs.write_file("new.txt", b"Hello, World!")
     written_file = tmp_path / "new.txt"
     assert written_file.read_bytes() == b"Hello, World!"
-    
+
+
 def test_write_file_overwrites_existing(tmp_path):
     fs = SafeFileSystem(tmp_path)
     existing = tmp_path / "file.txt"
     existing.write_text("old content")
-    
+
     fs.write_file("file.txt", b"new content")
-    
+
     assert existing.read_text() == "new content"
-    
+
+
 def test_write_file_blocks_path_traversal(tmp_path):
     fs = SafeFileSystem(tmp_path)
-    
+
     with pytest.raises(PathTraversalError):
         fs.write_file("../../etc/evil.txt", b"hacked")
-        
+
+
 def test_write_file_rejects_directory(tmp_path):
     fs = SafeFileSystem(tmp_path)
     (tmp_path / "mydir").mkdir()
-    
+
     with pytest.raises(IsADirectoryError):
         fs.write_file("mydir", b"content")
-        
+
+
 def test_write_file_requires_parent_directories(tmp_path):
     fs = SafeFileSystem(tmp_path)
-    
+
     with pytest.raises(FileNotFoundError):
         fs.write_file("subdir/nested/file.txt", b"content")

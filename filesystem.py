@@ -18,10 +18,10 @@ class SafeFileSystem:
 
         if not absolute_target.is_relative_to(self.root):
             raise PathTraversalError(f"Path traversal detected: {absolute_target}")
-        
+
         if must_exist and not absolute_target.exists():
             raise FileNotFoundError(f"Not found: {target_path}")
-        
+
         return absolute_target
 
     def read_file(self, target_path: str) -> bytes:
@@ -43,7 +43,7 @@ class SafeFileSystem:
                 relative_path = path.relative_to(self.root)
                 result.append(str(relative_path))
         return result
-    
+
     def write_file(self, target_path: str, content: bytes) -> None:
         valid_path = self.validate_path(target_path, must_exist=False)
         valid_path.write_bytes(content)
