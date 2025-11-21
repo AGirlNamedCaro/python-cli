@@ -36,13 +36,18 @@ def main():
         "json-pretty", help="Format JSON with proper indentation"
     )
     json_parser.add_argument("file", help="JSON file to format")
-    
-    replace_parser = subparsers.add_parser('replace', help='Search and replace text in files')
-    replace_parser.add_argument('search', help='Text to search for')
-    replace_parser.add_argument('replace', help='Text to replace with')
-    replace_parser.add_argument('glob', help='File pattern (e.g., *.txt)')
-    replace_parser.add_argument('--apply', action='store_true', 
-                            help='Apply changes (default is dry-run preview)')
+
+    replace_parser = subparsers.add_parser(
+        "replace", help="Search and replace text in files"
+    )
+    replace_parser.add_argument("search", help="Text to search for")
+    replace_parser.add_argument("replace", help="Text to replace with")
+    replace_parser.add_argument("glob", help="File pattern (e.g., *.txt)")
+    replace_parser.add_argument(
+        "--apply",
+        action="store_true",
+        help="Apply changes (default is dry-run preview)",
+    )
 
     args = parser.parse_args()
 

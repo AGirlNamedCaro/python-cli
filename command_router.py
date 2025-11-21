@@ -24,4 +24,6 @@ def execute_command(args):
         case "json-pretty":
             return json_pretty_command(fs, args.file)
         case "replace":
-            return replace_command(fs, args.search, args.replace, args.glob, dry_run=not args.apply)
+            return replace_command(
+                fs, args.search, args.replace, args.glob, dry_run=not args.apply
+            )
