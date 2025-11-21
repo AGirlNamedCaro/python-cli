@@ -1,5 +1,7 @@
 from exceptions import PathTraversalError, SymLinkNotAllowedError
 from pathlib import Path
+from typing import List
+import glob
 
 
 class SafeFileSystem:
@@ -21,3 +23,19 @@ class SafeFileSystem:
     def read_file(self, target_path: str) -> bytes:
         valid_path = self.validate_path(target_path)
         return valid_path.read_bytes()
+
+    def list_files(self, pattern: str = "*") -> List[str]:
+        matched_paths = self.root.glob(pattern)
+        
+        result = []
+        
+        for path in matched_paths:
+            resolved = path.resolve()
+            if not resolved.is_relative_to(self.root):
+                print(f"Skipping path outside root: {resolved}")
+                continue
+            
+            if path.is_file():
+                relative_path = path.relative_to(self.root)
+                result.append(str(relative_path))
+        return result
