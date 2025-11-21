@@ -12,7 +12,7 @@ def test_grep_command_finds_pattern_in_files(tmp_path):
 
     result = grep_command(fs, "TODO", "*.txt")
 
-    expected = ["file1.txt: This has TODO in it", "file3.txt: Also has TODO"]
+    expected = "file1.txt: This has TODO in it\nfile3.txt: Also has TODO"
 
     assert result == expected
     
@@ -23,10 +23,7 @@ def test_grep_multiple_matches_in_file(tmp_path):
 
     result = grep_command(fs, "TODO", "*.txt")
 
-    expected = [
-        "file1.txt: TODO line one",
-        "file1.txt: TODO line two"
-    ]
+    expected = "file1.txt: TODO line one\nfile1.txt: TODO line two"
 
     assert result == expected
     
@@ -38,7 +35,7 @@ def test_grep_skips_binary_files(tmp_path):
 
     result = grep_command(fs, "TODO", "*")
 
-    expected = ["file1.txt: This is a text file with TODO"]
+    expected = "file1.txt: This is a text file with TODO"
 
     assert result == expected
 
@@ -51,6 +48,6 @@ def test_grep_searches_content_not_filename(tmp_path):
 
     result = grep_command(fs, "TODO", "*.txt")
 
-    expected = ["file.txt: This line has TODO"]
+    expected = "file.txt: This line has TODO"
 
     assert result == expected

@@ -14,7 +14,7 @@ def grep_command(fs: SafeFileSystem, pattern: str, file_pattern: str) -> list[st
             for line in content.splitlines():
                 if pattern in line:
                     results.append(f"{file}: {line}")
-    return results
+    return "\n".join(results)
 
 def is_binary(data: bytes) -> bool:
     textchars = bytearray({7, 8, 9, 10, 12, 13, 27} | set(range(0x20, 0x100)))

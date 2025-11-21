@@ -1,7 +1,6 @@
 import argparse
 import sys
 from pathlib import Path
-from commands.read import read_command
 from exceptions import PathTraversalError, SymLinkNotAllowedError, BinaryFileError
 from command_router import execute_command
 
@@ -17,6 +16,10 @@ def main():
 
     read_parser = subparsers.add_parser("read", help="Read a text file safely")
     read_parser.add_argument("file", help="File to read")
+    
+    grep_parser = subparsers.add_parser("grep", help="Search for a pattern in text files safely")
+    grep_parser.add_argument("pattern", help="Pattern to search for")
+    grep_parser.add_argument("glob", help="File pattern (e.g., *.txt, **/*.py)")
 
     args = parser.parse_args()
 
