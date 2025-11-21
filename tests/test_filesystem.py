@@ -92,23 +92,25 @@ def test_list_files_finds_matching_files(tmp_path):
     expected_files = {"file1.txt", "file3.txt"}
 
     assert set(result) == expected_files
-    
+
+
 def test_list_files_blocks_path_traversal(tmp_path):
     fs = SafeFileSystem(tmp_path)
-    
+
     parent_file = tmp_path.parent / "outside.txt"
     parent_file.write_text("I'm outside!")
-    
+
     result = fs.list_files("../*.txt")
-    
+
     print(f"Result: {result}")
-    
+
     assert "outside.txt" not in result
     assert "../outside.txt" not in result
-    
+
+
 def test_list_files_recursive_glob(tmp_path):
     fs = SafeFileSystem(tmp_path)
-    
+
     (tmp_path / "file1.txt").write_text("root")
     (tmp_path / "docs").mkdir()
     (tmp_path / "docs" / "file2.txt").write_text("docs")
@@ -116,9 +118,8 @@ def test_list_files_recursive_glob(tmp_path):
     (tmp_path / "docs" / "notes" / "file3.txt").write_text("nested")
     (tmp_path / "empty_dir").mkdir()
 
-    
     result = fs.list_files("**/*.txt")
-    
+
     expected = {"file1.txt", "docs/file2.txt", "docs/notes/file3.txt"}
-    
+
     assert set(result) == expected
