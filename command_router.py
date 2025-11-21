@@ -4,6 +4,7 @@ from commands.read import read_command
 from commands.grep import grep_command
 from commands.checksum import checksum_command
 from commands.json_pretty import json_pretty_command
+from commands.replace import replace_command
 
 
 def execute_command(args):
@@ -22,3 +23,5 @@ def execute_command(args):
             return checksum_command(fs, args.file, args.algorithm)
         case "json-pretty":
             return json_pretty_command(fs, args.file)
+        case "replace":
+            return replace_command(fs, args.search, args.replace, args.glob, dry_run=not args.apply)
